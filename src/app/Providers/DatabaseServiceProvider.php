@@ -18,13 +18,20 @@ class DatabaseServiceProvider extends ServiceProvider
     {
         /*-----TENANT SETTINGS-----*/
         $this->app->singleton( 'siteTenancy', function ( $app ) {
-            Cache::forget('site_tenancy');
+            $request    = app(\Illuminate\Http\Request::class);
+            $tenant     = Tenant::where('subdomain', $request->subdomain)->first();
+            return $tenant ?? [];
+        } );
+
+
+
+       /* $this->app->singleton( 'siteTenancy', function ( $app ) {
             return Cache::rememberForever( 'site_tenancy', function (){
                 $request = app(\Illuminate\Http\Request::class);
                 $tenant = Tenant::where('subdomain', $request->subdomain)->first();
                 return $tenant ?? [];
             } );
-        } );
+        } );*/
     }
 
     /**
