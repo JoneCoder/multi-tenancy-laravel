@@ -2,16 +2,14 @@
 
 namespace Database\Seeders;
 
-use Database\Seeders\Master\AdminSeeder;
-use Database\Seeders\Master\TenantSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\Tenant\AdminSeeder;
 
-class DatabaseSeeder extends Seeder
+class TenantSeeder extends Seeder
 {
-    use WithoutModelEvents;
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
@@ -19,7 +17,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             AdminSeeder::class,
-            TenantSeeder::class,
         ]);
     }
 }

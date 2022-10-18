@@ -73,7 +73,7 @@ class RunMigration extends Command
             '--path' => '/database/migration/tenant'
         ]);
         Artisan::call('db:seed',[
-            '--class' => ''
+            '--class' => 'TenantSeeder'
         ]);
 
         $this->info("End Connecting to {$tenant->name}");
