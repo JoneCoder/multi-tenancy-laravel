@@ -8,7 +8,6 @@ use App\Models\Tenant;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Exception;
-use Illuminate\Http\Response;
 
 class MasterController extends Controller
 {
