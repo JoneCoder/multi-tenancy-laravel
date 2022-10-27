@@ -11,12 +11,12 @@ class TenantManager
 {
     public function setConnection(Tenant $tenant): void
     {
-        Config::set("database.connections.mysql2", ["database" => $tenant->db_name]);
+        Config::set("database.connections.mysql2.database", $tenant->db_name);
     }
 
     public function setConnectionOrganize(Organize $organize): void
     {
-        Config::set("database.connections.mysql3", ["database" => $organize->db_name]);
+        Config::set("database.connections.mysql3.database", $organize->db_name);
     }
 
     public function isMasterDomain(Request $request): bool

@@ -25,8 +25,8 @@ class RunDatabaseMigration
      */
     public function handle(DatabaseMigration $event): bool
     {
-        $tenant = $event->tenant();
-        $migration = Artisan::call('tenants:migrate', ['id' => $tenant->id]);
+        $tenant = $event->tenant;
+        $migration = Artisan::call('tenants:migrate', ['id' => $tenant->id, '--fresh']);
         return $migration === 0;
     }
 }

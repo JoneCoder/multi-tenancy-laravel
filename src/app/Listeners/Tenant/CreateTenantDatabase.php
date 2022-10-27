@@ -28,7 +28,7 @@ class CreateTenantDatabase
      */
     public function handle(TenantCreated $event): void
     {
-        $tenant = $event->tenant();
+        $tenant = $event->tenant;
 
         if(!$this->database->createDatabase($tenant)){
             throw new \Exception(trans('cruds.tenant.database.create_error'));

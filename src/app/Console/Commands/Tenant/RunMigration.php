@@ -6,6 +6,7 @@ use App\Models\Tenant;
 use App\Tenant\TenantManager;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
+use DB;
 
 class RunMigration extends Command
 {
@@ -14,7 +15,7 @@ class RunMigration extends Command
      *
      * @var string
      */
-    protected $signature = 'tenants:migrate';
+    protected $signature = 'tenants:migrate {id} {--fresh}';
 
 
     public TenantManager $tenant;
@@ -67,10 +68,13 @@ class RunMigration extends Command
         $command = $this->option('fresh')? 'migrate:fresh' : 'migrate';
 
         $this->tenant->setConnection($tenant);
+
         $this->info("Connecting to {$tenant->name}");
+
         Artisan::call($command, [
+            '--database' => 'mysql2',
             '--force' => true,
-            '--path' => '/database/migration/tenant'
+            '--path' => '/database/migrations/tenant'
         ]);
         Artisan::call('db:seed',[
             '--class' => 'TenantSeeder'
