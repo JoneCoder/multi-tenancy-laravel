@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', 'Auth\LoginController@showLoginForm');
+Route::get('/queue', 'MasterController@allTenantMigrationQueue');
 
 Route::middleware(['auth'])->group(function() {
     Route::post('create-tenant', 'MasterController@createTenant');

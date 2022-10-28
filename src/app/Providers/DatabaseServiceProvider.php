@@ -17,21 +17,19 @@ class DatabaseServiceProvider extends ServiceProvider
     public function register()
     {
         /*-----TENANT SETTINGS-----*/
-        $this->app->singleton( 'siteTenancy', function ( $app ) {
+        /*$this->app->singleton( 'siteTenancy', function ( $app ) {
             $request    = app(\Illuminate\Http\Request::class);
             $tenant     = Tenant::where('subdomain', $request->subdomain)->first();
             return $tenant ?? [];
-        } );
+        } );*/
 
-
-
-       /* $this->app->singleton( 'siteTenancy', function ( $app ) {
-            return Cache::rememberForever( 'site_tenancy', function (){
-                $request = app(\Illuminate\Http\Request::class);
+        $this->app->singleton( 'siteTenancy', function ( $app ) {
+            $request = app(Request::class);
+            return Cache::rememberForever( $request->subdomain.'site_tenancy', function ()use($request){
                 $tenant = Tenant::where('subdomain', $request->subdomain)->first();
                 return $tenant ?? [];
             } );
-        } );*/
+        } );
     }
 
     /**

@@ -76,6 +76,7 @@ class RunMigration extends Command
             '--force' => true,
             '--path' => '/database/migrations/tenant'
         ]);
+
         Artisan::call('db:seed',[
             '--class' => 'TenantSeeder'
         ]);
