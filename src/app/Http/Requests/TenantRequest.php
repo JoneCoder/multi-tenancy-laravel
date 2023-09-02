@@ -26,6 +26,7 @@ class TenantRequest extends FormRequest
 
         return [
             'name'          => ['required', 'string', 'max:191'],
+            'username'      => ['required', 'string', 'max:191'],
             'email'         => ['required', 'email'],
             'subdomain'     => ['required', 'unique:tenants'. ($this->id ? ",id,$this->id" : '')],
             'db_name'       => ['required', 'unique:tenants'. ($this->id ? ",id,$this->id" : '')]

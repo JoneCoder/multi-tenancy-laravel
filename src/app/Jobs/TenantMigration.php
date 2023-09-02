@@ -51,14 +51,16 @@ class TenantMigration implements ShouldQueue
      *
      * @param Tenant $tenant
      */
-    public function execCommand(Tenant $tenant)
+    public function execCommand(Tenant $tenant): bool
     {
         $command = $this->option == 'fresh'? 'migrate:fresh' : 'migrate';
         $this->tenantManager->setConnection($tenant);
-        Artisan::call($command, [
+        $migration = Artisan::call($command, [
             '--database' => 'mysql2',
             '--force' => true,
             '--path' => '/database/migrations/tenant'
         ]);
+
+        return $migration === 0;
     }
 }

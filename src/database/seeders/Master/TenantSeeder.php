@@ -16,10 +16,10 @@ class TenantSeeder extends Seeder
     public function run()
     {
         Tenant::create([
-            'name'          => 'Test Domain',
-            'email'         => 'example@gmail.com',
-            'subdomain'     => 'test',
-            'db_name'       => 'test',
+            'name'          => 'Jone Domain',
+            'email'         => 'jonecoder@gmail.com',
+            'subdomain'     => 'jonecoder',
+            'db_name'       => 'jonecoder',
             'admin_id'      => 1,
         ]);
     }

@@ -8,7 +8,7 @@ use App\Jobs\AllTenantMigration;
 use App\Models\Tenant;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Exception;
+use Exception, DB;
 
 class MasterController extends Controller
 {
@@ -21,12 +21,15 @@ class MasterController extends Controller
     public function createTenant(TenantRequest $request): JsonResponse
     {
         try {
+            DB::beginTransaction();
             $tenant = Tenant::create($request->all());
 
             event(new TenantCreated($tenant));
 
+            DB::commit();
             return response()->json(['message' => 'Create Successfully!'], 200);
         } catch (Exception $ex) {
+            DB::rollback();
             return response()->json($ex->errorInfo, 422);
         }
     }
