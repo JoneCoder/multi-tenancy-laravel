@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Tenant\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['namespace' => 'Tenant'], function () {
-    Route::get('/', 'Auth\LoginController@showLoginForm');
+    Route::get('/', [LoginController::class, 'showLoginForm']);
 });

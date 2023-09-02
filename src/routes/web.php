@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\MasterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', 'Auth\LoginController@showLoginForm');
-Route::get('/queue', 'MasterController@allTenantMigrationQueue');
+Route::get('/', [LoginController::class, 'showLoginForm']);
+Route::get('/queue', [MasterController::class, 'allTenantMigrationQueue']);
 
 Route::middleware(['auth'])->group(function() {
-    Route::post('create-tenant', 'MasterController@createTenant');
+    Route::post('create-tenant', [MasterController::class, 'createTenant']);
 });
